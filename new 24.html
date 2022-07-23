@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Serveillance Robot</title>
+        <style>
+            .button {background-color: #0097b5;border: none;border-radius: 4px;color: white;padding: 10px 25px;text-align: center;font-size: 16px;margin: 4px 2px;cursor: pointer;}
+            .slider {appearance: none;width: 70%;height: 15px;border-radius: 10px;background: #d3d3d3;outline: none;}
+            .slider::-webkit-slider-thumb {appearance: none;appearance: none;width: 30px;height: 30px;border-radius: 50%;background: #0097b5;}
+            .label {color: #0097b5;font-size: 18px;}
+        </style>
+		<script>
+			$(document).bind('keydown', 'w', function(){document.getElementById('Forward').click();});
+		</script>
+    </head>
+    <body>
+		<div align=center> <img src='http://192.168.43.4:81/stream' style='width:300px; transform:rotate(180deg);'></div>
+    <br/>
+    <br/>
+    <div align=center>
+		<button class="button" id="forward" ontouchstart="fetch(document.location.origin+'/control?var=car&val=1');" ontouchend="fetch(document.location.origin+'/control?var=car&val=3');" >Forward</button>
+    </div>
+    <br/>
+    <div align=center>
+		<button class="button" id="turnleft" ontouchstart="fetch(document.location.origin+'/control?var=car&val=2');" ontouchend="fetch(document.location.origin+'/control?var=car&val=3');" >Turn Left</button>
+		<button class="button" id="stop" onclick="fetch(document.location.origin+'/control?var=car&val=3');">Стоп</button>
+		<button class="button" id="turnright" ontouchstart="fetch(document.location.origin+'/control?var=car&val=4');" ontouchend="fetch(document.location.origin+'/control?var=car&val=3');" >Turn Right</button>
+		</div>
+    <br/>
+		<div align=center>
+		<button class="button" id="backward" ontouchstart="fetch(document.location.origin+'/control?var=car&val=5');" ontouchend="fetch(document.location.origin+'/control?var=car&val=3');">Backward</button>
+    </div>
+    <br/>
+    <div align=center>
+		<label class="label">Flash</label>
+		<input type="range" class="slider" id="flash" min="0" max="255" value="0" onchange="try{fetch(document.location.origin+'/control?var=flash&val='+this.value);}catch(e){}">
+    </div>
+    <br/>
+    <div align=center>
+		<label class="label">Speed</label>
+		<input type="range" class="slider" id="speed" min="0" max="255" value="255" onchange="try{fetch(document.location.origin+'/control?var=speed&val='+this.value);}catch(e){}">
+    </div>
+    <br/>
+    <div align=center>
+		<label class="label">Servo</label>
+		<input type="range" class="slider" id="servo" min="325" max="650" value="487" onchange="try{fetch(document.location.origin+'/control?var=servo&val='+this.value);}catch(e){}">
+    </div>
+	
+	<form oninput="result.value=a">
+	
+			
+		<p>расстояние: <output name="result.value">0</output></p>
+		
+	</form>
+
+    </body>
+</html>
